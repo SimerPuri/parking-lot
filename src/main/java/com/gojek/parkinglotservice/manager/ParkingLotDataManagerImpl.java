@@ -23,7 +23,6 @@ public class ParkingLotDataManagerImpl implements ParkingLotDataManager {
         this.parkingPolicy = parkingPolicy;
         this.vehicleSlotMapping = new ConcurrentHashMap<Integer, Vehicle>();
         for (int i = 1; i <= capacity; i++) {
-//            parkingPolicy.put(i, Optional.empty());
             parkingPolicy.addParkingSlots(i);
         }
     }

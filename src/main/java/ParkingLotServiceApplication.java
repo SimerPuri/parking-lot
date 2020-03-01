@@ -16,11 +16,9 @@ public class ParkingLotServiceApplication {
 
 	public static void main(String[] args) {
 		ProcessRequestImpl processor = new ProcessRequestImpl(new ParkingServiceImpl());
-//		processor.setService(new ParkingServiceImpl());
 		BufferedReader bufferReader = null;
 		String input = null;
-		try
-		{
+		try {
 			System.out.println("----Parking Lot----");
 			switch (args.length) {
 				case COMMAND_LINE: {
@@ -36,8 +34,7 @@ public class ParkingLotServiceApplication {
 								if (processor.isValidRequest(input)) {
 									try {
 										processor.executeRequest(input);
-									}
-									catch (Exception e) {
+									} catch (Exception e) {
 										System.out.println(e.getMessage());
 									}
 								} else {
@@ -45,16 +42,15 @@ public class ParkingLotServiceApplication {
 								}
 							}
 						} catch (Exception e) {
-//							throw new ParkingException(ErrorCode.INVALID_REQUEST.getMessage(), e);
+							throw new Exception("Error occured");
 						}
 					}
 					break;
 				}
-				case FILE_INPUT:// File input/output
+				case FILE_INPUT:
 				{
 					File inputFile = new File(args[0]);
-					try
-					{
+					try {
 						bufferReader = new BufferedReader(new FileReader(inputFile));
 						int lineNo = 1;
 						while ((input = bufferReader.readLine()) != null)
@@ -66,36 +62,29 @@ public class ParkingLotServiceApplication {
 								} catch (Exception e) {
 									System.out.println(e.getMessage());
 								}
-							} else
-								System.out.println("Incorrect Command Found at line: " + lineNo + " ,Input: " + input);
+							} else {
+								System.out.println("Incorrect Command at line: " + lineNo + " ,Input: " + input);
+							}
 							lineNo++;
 						}
-					}
-					catch (Exception e)
-					{
-//						throw new Exception("ErrorCode.INVALID_FILE.getMessage(), e");
-						System.out.println("f");
+					} catch (Exception e) {
+						throw new Exception("Error Occurred");
 					}
 					break;
 				}
 				default:
-					System.out.println("Invalid input. Usage Style: java -jar <jar_file_path> <input_file_path>");
+					System.out.println("Use java -jar <jar_file_path> <input_file_path>");
 			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
-//		catch (ParkingException e)
-//		{
-//			e.printStackTrace();
-//			System.out.println(e.getMessage());
-//		}
-		finally
-		{
-			try
-			{
-				if (bufferReader != null)
+		finally {
+			try {
+				if (bufferReader != null) {
 					bufferReader.close();
-			}
-			catch (IOException e)
-			{
+				}
+			} catch (IOException e) {
+				System.out.println(e.getMessage());
 			}
 		}
 	}
