@@ -10,7 +10,9 @@ public final class ParkingLotCommandLineOptions {
      */
     public static void selectOptionsViaCommandLine() {
         StringBuilder options = new StringBuilder();
-        options.append("Select from the following options -");
+        options.append("Select from the following options -")
+                .append("\n");
+
         options.append("create_parking_lot {[capacity]}")
                 .append("\n");
 

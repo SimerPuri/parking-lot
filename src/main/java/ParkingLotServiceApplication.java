@@ -1,3 +1,4 @@
+import com.gojek.parkinglotservice.resource.ProcessRequest;
 import com.gojek.parkinglotservice.resource.ProcessRequestImpl;
 import com.gojek.parkinglotservice.service.ParkingServiceImpl;
 
@@ -15,61 +16,18 @@ import static com.gojek.parkinglotservice.util.ParkingLotCommandLineOptions.sele
 public class ParkingLotServiceApplication {
 
 	public static void main(String[] args) {
-		ProcessRequestImpl processor = new ProcessRequestImpl(new ParkingServiceImpl());
+		ProcessRequest processor = new ProcessRequestImpl(new ParkingServiceImpl());
 		BufferedReader bufferReader = null;
-		String input = null;
+		String request = null;
 		try {
 			System.out.println("----Parking Lot----");
 			switch (args.length) {
 				case COMMAND_LINE: {
-					selectOptionsViaCommandLine();
-					System.out.println(" Enter 'exit' for termination");
-					while (true) {
-						try {
-							bufferReader = new BufferedReader(new InputStreamReader(System.in));
-							input = bufferReader.readLine().trim();
-							if (input.equalsIgnoreCase("exit")) {
-								break;
-							} else {
-								if (processor.isValidRequest(input)) {
-									try {
-										processor.executeRequest(input);
-									} catch (Exception e) {
-										System.out.println(e.getMessage());
-									}
-								} else {
-									selectOptionsViaCommandLine();
-								}
-							}
-						} catch (Exception e) {
-							throw new Exception("Error occured");
-						}
-					}
+					processCommandLineRequest(bufferReader, processor, request);
 					break;
 				}
-				case FILE_INPUT:
-				{
-					File inputFile = new File(args[0]);
-					try {
-						bufferReader = new BufferedReader(new FileReader(inputFile));
-						int lineNo = 1;
-						while ((input = bufferReader.readLine()) != null)
-						{
-							input = input.trim();
-							if (processor.isValidRequest(input)) {
-								try {
-									processor.executeRequest(input);
-								} catch (Exception e) {
-									System.out.println(e.getMessage());
-								}
-							} else {
-								System.out.println("Incorrect Command at line: " + lineNo + " ,Input: " + input);
-							}
-							lineNo++;
-						}
-					} catch (Exception e) {
-						throw new Exception("Error Occurred");
-					}
+				case FILE_INPUT: {
+					processFileRequest(bufferReader, processor, request, args);
 					break;
 				}
 				default:
@@ -77,8 +35,7 @@ public class ParkingLotServiceApplication {
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-		}
-		finally {
+		} finally {
 			try {
 				if (bufferReader != null) {
 					bufferReader.close();
@@ -88,6 +45,59 @@ public class ParkingLotServiceApplication {
 			}
 		}
 	}
+
+	private static void processCommandLineRequest(BufferedReader bufferReader, ProcessRequest processRequest,
+										   String request) throws Exception {
+		selectOptionsViaCommandLine();
+		System.out.println(" Enter 'exit' for termination");
+		while (true) {
+			try {
+				bufferReader = new BufferedReader(new InputStreamReader(System.in));
+				request = bufferReader.readLine().trim();
+				if (request.equalsIgnoreCase("exit")) {
+					break;
+				} else {
+					if (processRequest.isValidRequest(request)) {
+						try {
+							processRequest.executeRequest(request);
+						} catch (Exception e) {
+							System.out.println(e.getMessage());
+						}
+					} else {
+						selectOptionsViaCommandLine();
+					}
+				}
+			} catch (Exception e) {
+				throw new Exception("Error occurred");
+			}
+		}
+	}
+
+	private static void processFileRequest(BufferedReader bufferReader, ProcessRequest processRequest,
+										   String request, String[] args) throws Exception {
+		File inputFile = new File(args[0]);
+		try {
+			bufferReader = new BufferedReader(new FileReader(inputFile));
+			int lineNo = 1;
+			while ((request = bufferReader.readLine()) != null)
+			{
+				request = request.trim();
+				if (processRequest.isValidRequest(request)) {
+					try {
+						processRequest.executeRequest(request);
+					} catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
+				} else {
+					System.out.println("Incorrect Command at line: " + lineNo + " ,Input: " + request);
+				}
+				lineNo++;
+			}
+		} catch (Exception e) {
+			throw new Exception("Error Occurred");
+		}
+	}
+
 	
 
 }
