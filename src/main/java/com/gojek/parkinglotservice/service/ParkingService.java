@@ -22,40 +22,40 @@ public interface ParkingService {
      * @param vehicle the vehicle
      * @return the optional
      */
-    Optional<Integer> parkVehicle(Vehicle vehicle);
+    Optional<Integer> parkVehicle(Vehicle vehicle) throws Exception;
 
     /**
      * Un park vehicle.
      *
      * @param slotNumber the slot number
      */
-    void unParkVehicle(int slotNumber);
+    void unParkVehicle(int slotNumber) throws Exception;
 
     /**
      * Gets status.
      */
-    void getStatus();
+    void getStatus() throws Exception;
 
     /**
      * Gets regis number for cars with colour.
      *
      * @param colour the colour
      */
-    void getRegisNumberForCarsWithColour(String colour) ;
+    void getRegisNumberForCarsWithColour(String colour) throws Exception;
 
     /**
      * Gets slot numbers for cars with colour.
      *
      * @param colour the colour
      */
-    void getSlotNumbersForCarsWithColour(String colour) ;
+    void getSlotNumbersForCarsWithColour(String colour) throws Exception;
 
     /**
      * Gets slot number from regis number.
      *
      * @param registrationNo the registration no
      */
-    void getSlotNumberFromRegisNumber(String registrationNo) ;
+    void getSlotNumberFromRegisNumber(String registrationNo) throws Exception;
 
     /**
      * Clean.
