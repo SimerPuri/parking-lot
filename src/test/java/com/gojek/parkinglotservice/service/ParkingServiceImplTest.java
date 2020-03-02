@@ -10,23 +10,35 @@ import java.io.PrintStream;
 
 import static org.junit.Assert.assertTrue;
 
+/**
+ * The type Parking service impl test.
+ */
 public class ParkingServiceImplTest {
 
         private final ByteArrayOutputStream outContent	= new ByteArrayOutputStream();
         private static ParkingService parkingService = null;
 
 
-        @Before
+    /**
+     * Initialize.
+     */
+    @Before
         public void initialize() {
             System.setOut(new PrintStream(outContent));
         }
 
-        @After
+    /**
+     * Clean up.
+     */
+    @After
         public void cleanUp() {
             parkingService.clean();
         }
 
-        @Test
+    /**
+     * Create parking lot with capacity.
+     */
+    @Test
         public void createParkingLotWithCapacity() {
             parkingService = new ParkingServiceImpl();
 
@@ -34,7 +46,10 @@ public class ParkingServiceImplTest {
             assertTrue("Created a parking lot with 6 slots\n".equalsIgnoreCase(outContent.toString()));
         }
 
-        @Test
+    /**
+     * Existing parking lot.
+     */
+    @Test
         public void existingParkingLot() {
             parkingService = new ParkingServiceImpl();
             parkingService.createParkingLotWithCapacity(6);
@@ -44,9 +59,14 @@ public class ParkingServiceImplTest {
             assertTrue(outContent.toString().contains("Parking Lot already exists\n"));
 
         }
-        
-        @Test
-        public void testParkVehicle() {
+
+    /**
+     * Test park vehicle.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+        public void testParkVehicle() throws Exception {
             parkingService = new ParkingServiceImpl();
             parkingService.createParkingLotWithCapacity(6);
             parkingService.parkVehicle(new Car("KA-01-HH-1234", "White"));
@@ -54,8 +74,13 @@ public class ParkingServiceImplTest {
 
         }
 
-        @Test
-        public void testParkVehicleWhenCapacityReaches() {
+    /**
+     * Test park vehicle when capacity reaches.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+        public void testParkVehicleWhenCapacityReaches() throws Exception {
             parkingService = new ParkingServiceImpl();
             parkingService.createParkingLotWithCapacity(1);
             parkingService.parkVehicle(new Car("KA-01-HH-1234", "White"));
@@ -65,8 +90,13 @@ public class ParkingServiceImplTest {
 
         }
 
-        @Test
-        public void testParkVehicleWhenVehicleExists() {
+    /**
+     * Test park vehicle when vehicle exists.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+        public void testParkVehicleWhenVehicleExists() throws Exception {
             parkingService = new ParkingServiceImpl();
             parkingService.createParkingLotWithCapacity(2);
             parkingService.parkVehicle(new Car("KA-01-HH-1234", "White"));
@@ -76,8 +106,13 @@ public class ParkingServiceImplTest {
 
         }
 
-        @Test
-        public void testParkVehiclenearestSlot() {
+    /**
+     * Test park vehiclenearest slot.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+        public void testParkVehiclenearestSlot() throws Exception {
             parkingService = new ParkingServiceImpl();
             parkingService.createParkingLotWithCapacity(2);
             parkingService.parkVehicle(new Car("KA-01-HH-1234", "White"));
@@ -88,8 +123,13 @@ public class ParkingServiceImplTest {
 
         }
 
-        @Test
-        public void testUnParkVehicleWhenVehicleExists() {
+    /**
+     * Test un park vehicle when vehicle exists.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+        public void testUnParkVehicleWhenVehicleExists() throws Exception {
             parkingService = new ParkingServiceImpl();
             parkingService.createParkingLotWithCapacity(1);
             parkingService.parkVehicle(new Car("KA-01-HH-1234", "White"));
@@ -98,8 +138,13 @@ public class ParkingServiceImplTest {
 
         }
 
-        @Test
-        public void testUnParkVehicleWhenVehicleDoesnotExists() {
+    /**
+     * Test un park vehicle when vehicle doesnot exists.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+        public void testUnParkVehicleWhenVehicleDoesnotExists() throws Exception {
             parkingService = new ParkingServiceImpl();
             parkingService.createParkingLotWithCapacity(6);
             parkingService.unParkVehicle(1);
@@ -107,8 +152,13 @@ public class ParkingServiceImplTest {
 
         }
 
-        @Test
-        public void testStatusOfVehicles() {
+    /**
+     * Test status of vehicles.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+        public void testStatusOfVehicles() throws Exception {
             parkingService = new ParkingServiceImpl();
             parkingService.createParkingLotWithCapacity(1);
             parkingService.parkVehicle(new Car("KA-01-HH-1234", "White"));
@@ -118,8 +168,13 @@ public class ParkingServiceImplTest {
 
         }
 
-        @Test
-        public void testStatusOfVehiclesWhenParkingIsEmpty() {
+    /**
+     * Test status of vehicles when parking is empty.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+        public void testStatusOfVehiclesWhenParkingIsEmpty() throws Exception {
             parkingService = new ParkingServiceImpl();
             parkingService.createParkingLotWithCapacity(1);
             parkingService.getStatus();
@@ -127,8 +182,13 @@ public class ParkingServiceImplTest {
 
         }
 
-        @Test
-        public void testRegisNumberWithColour() {
+    /**
+     * Test regis number with colour.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+        public void testRegisNumberWithColour() throws Exception {
             parkingService = new ParkingServiceImpl();
             parkingService.createParkingLotWithCapacity(1);
             parkingService.parkVehicle(new Car("KA-01-HH-1234", "White"));
@@ -136,8 +196,13 @@ public class ParkingServiceImplTest {
             assertTrue(outContent.toString().contains("KA-01-HH-1234\n"));
         }
 
-        @Test
-        public void testRegisNumberWithColourWhenCarNotFound() {
+    /**
+     * Test regis number with colour when car not found.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+        public void testRegisNumberWithColourWhenCarNotFound() throws Exception {
             parkingService = new ParkingServiceImpl();
             parkingService.createParkingLotWithCapacity(1);
             parkingService.parkVehicle(new Car("KA-01-HH-1234", "White"));
@@ -145,8 +210,13 @@ public class ParkingServiceImplTest {
             assertTrue(outContent.toString().contains("Not found\n"));
         }
 
-        @Test
-        public void testRegisNumberWithColourWithCaseInsesitive() {
+    /**
+     * Test regis number with colour with case insesitive.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+        public void testRegisNumberWithColourWithCaseInsesitive() throws Exception {
             parkingService = new ParkingServiceImpl();
             parkingService.createParkingLotWithCapacity(1);
             parkingService.parkVehicle(new Car("KA-01-HH-1234", "White"));
@@ -154,8 +224,13 @@ public class ParkingServiceImplTest {
             assertTrue(outContent.toString().contains("KA-01-HH-1234\n"));
         }
 
-        @Test
-        public void testSlotNumberWithColour() {
+    /**
+     * Test slot number with colour.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+        public void testSlotNumberWithColour() throws Exception {
             parkingService = new ParkingServiceImpl();
             parkingService.createParkingLotWithCapacity(1);
             parkingService.parkVehicle(new Car("KA-01-HH-1234", "White"));
@@ -163,8 +238,13 @@ public class ParkingServiceImplTest {
             assertTrue(outContent.toString().contains("1\n"));
         }
 
-        @Test
-        public void testSlotNumberWithColourWhenCarNotFound() {
+    /**
+     * Test slot number with colour when car not found.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+        public void testSlotNumberWithColourWhenCarNotFound() throws Exception {
             parkingService = new ParkingServiceImpl();
             parkingService.createParkingLotWithCapacity(1);
             parkingService.parkVehicle(new Car("KA-01-HH-1234", "White"));
@@ -172,8 +252,13 @@ public class ParkingServiceImplTest {
             assertTrue(outContent.toString().contains("Not found\n"));
         }
 
-        @Test
-        public void testSlotNumberFromRegisNumber() {
+    /**
+     * Test slot number from regis number.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+        public void testSlotNumberFromRegisNumber() throws Exception {
             parkingService = new ParkingServiceImpl();
             parkingService.createParkingLotWithCapacity(1);
             parkingService.parkVehicle(new Car("KA-01-HH-1234", "White"));
@@ -181,8 +266,13 @@ public class ParkingServiceImplTest {
             assertTrue(outContent.toString().contains("1\n"));
         }
 
-        @Test
-        public void testSlotNumberFromRegisNumberWhenCarNotFound() {
+    /**
+     * Test slot number from regis number when car not found.
+     *
+     * @throws Exception the exception
+     */
+    @Test
+        public void testSlotNumberFromRegisNumberWhenCarNotFound() throws Exception {
             parkingService = new ParkingServiceImpl();
             parkingService.createParkingLotWithCapacity(1);
             parkingService.parkVehicle(new Car("KA-01-HH-1234", "White"));
