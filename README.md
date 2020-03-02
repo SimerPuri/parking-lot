@@ -9,12 +9,29 @@ Note: This assumes that your environment is setup to use maven.
 
 Any IDE supports maven so feel free to use Netbeans, IntelliJ, Eclipse
 
+# Language Used
+
+Java
+
+# Project Requirements
+* JDK 1.8
+
+* Maven
+
+* Junit
+
 ```
 # How to run locally
 ```
 -> Via command prompt commands
 
+./parking_lot.sh
+
 -> Via giving Input file
+
+./parking_lot.sh  <input_filepath>
+
+e.g. ./parking_lot.sh  parking_lot_file_inputs.txt
 
 ```
 # How to build locally

@@ -164,7 +164,7 @@ public class ParkingServiceImplTest {
             parkingService.parkVehicle(new Car("KA-01-HH-1234", "White"));
             assertTrue(outContent.toString().contains("Allocated slot number: 1\n"));
             parkingService.getStatus();
-            assertTrue(outContent.toString().contains("1\t\t\tKA-01-HH-1234\t\tWhite\n"));
+            assertTrue(outContent.toString().contains("1\t\tKA-01-HH-1234\t\tWhite\n"));
 
         }
 

@@ -80,7 +80,7 @@ public class ParkingServiceImpl implements ParkingService {
     public void getStatus() throws Exception {
         lock.writeLock().lock();
         try {
-            System.out.println("Slot No.\tRegistration No\t\tColour");
+            System.out.println("Slot No.\tRegistration No\tColour");
             Map<Integer, Vehicle> vehicles = parkingLotDataManager.status();
             TreeSet<Integer> vehicleParkingSpots = new TreeSet<>(vehicles.keySet());
 
@@ -89,7 +89,7 @@ public class ParkingServiceImpl implements ParkingService {
             }
 
             vehicleParkingSpots.forEach(vehicleParkingSpot ->
-                    System.out.println(vehicleParkingSpot + "\t\t\t" + vehicles.get(vehicleParkingSpot).getRegistrationNumber()
+                    System.out.println(vehicleParkingSpot + "\t\t" + vehicles.get(vehicleParkingSpot).getRegistrationNumber()
                             + "\t\t" + vehicles.get(vehicleParkingSpot).getColour())
             );
         } catch (Exception e) {

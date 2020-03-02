@@ -1,3 +1,5 @@
+package com.gojek.parkinglotservice;
+
 import com.gojek.parkinglotservice.resource.ProcessRequest;
 import com.gojek.parkinglotservice.resource.ProcessRequestImpl;
 import com.gojek.parkinglotservice.service.ParkingServiceImpl;
