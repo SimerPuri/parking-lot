@@ -15,9 +15,13 @@ Any IDE supports maven so feel free to use Netbeans, IntelliJ, Eclipse
 -> Via command prompt commands
 
 -> Via giving Input file
+
 ```
+# How to build locally
+```
+mvn clean install
 
-
+```
 # Test Case Scenarios
 ```
 Junit and Mockito frameworks used to test the workflows.
